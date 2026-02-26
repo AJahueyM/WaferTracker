@@ -10,7 +10,7 @@ interface WaferGridProps {
 
 export function WaferGrid({ wafer, onNodeClick }: WaferGridProps) {
   /** Build the 2D grid and a Set of node IDs that fall inside the circle. */
-  const { grid: nodes, insideCircle, displayLabels } = useMemo(() => {
+  const { grid: nodes, insideCircle } = useMemo(() => {
     const grid: WaferNode[][] = [];
     const inside = new Set<string>();
 
