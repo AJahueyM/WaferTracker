@@ -17,8 +17,8 @@ export function WaferGrid({ wafer, onNodeClick }: WaferGridProps) {
     // Center of the grid (continuous coords)
     const centerR = (wafer.rows - 1) / 2;
     const centerC = (wafer.cols - 1) / 2;
-    // Radius — use the smaller half-dimension so the circle fits
-    const radius = Math.min(wafer.rows, wafer.cols) / 2;
+    // Radius — use the larger half-dimension so both dimensions are fully visible
+    const radius = Math.max(wafer.rows, wafer.cols) / 2;
 
     for (let r = 0; r < wafer.rows; r++) {
       const row: WaferNode[] = [];
@@ -90,18 +90,17 @@ export function WaferGrid({ wafer, onNodeClick }: WaferGridProps) {
           {nodes.map((row) =>
             row.map((node) => {
               const visible = insideCircle.has(node.id);
-              const label = displayLabels.get(node.id) ?? node.id;
               return (
                 <button
                   key={node.id}
                   className={`wafer-node${visible ? '' : ' wafer-node-hidden'}`}
                   style={{ background: visible ? qualityColorMap[node.quality] : 'transparent' }}
                   onClick={() => visible && onNodeClick(node)}
-                  title={visible ? `${label} — ${qualityLabelMap[node.quality]}` : undefined}
-                  aria-label={visible ? `Node ${label}, quality: ${node.quality}` : undefined}
+                  title={visible ? `${node.id} — ${qualityLabelMap[node.quality]}` : undefined}
+                  aria-label={visible ? `Node ${node.id}, quality: ${node.quality}` : undefined}
                   tabIndex={visible ? 0 : -1}
                 >
-                  {visible && <span className="node-label">{label}</span>}
+                  {visible && <span className="node-label">{node.id}</span>}
                 </button>
               );
             }),

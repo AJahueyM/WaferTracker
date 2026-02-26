@@ -62,8 +62,8 @@ export function Sidebar({ wafers, activeWaferId, onCreate, onDelete, onImport }:
 
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
-  const [rows, setRows] = useState('8');
-  const [cols, setCols] = useState('8');
+  const [rows, setRows] = useState('');
+  const [cols, setCols] = useState('');
 
   const handleExport = useCallback(() => {
     if (!(ds instanceof CacheDataSource)) return;
