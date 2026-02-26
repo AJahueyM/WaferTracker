@@ -1,0 +1,133 @@
+.wafer-grid-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wafer-grid-container h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #e4e4e7;
+  margin-bottom: 0.25rem;
+}
+
+.wafer-grid-container .subtitle {
+  font-size: 0.8rem;
+  color: #71717a;
+  margin-bottom: 1rem;
+}
+
+/* Legend */
+.quality-legend {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.quality-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: #a1a1aa;
+}
+
+.quality-legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+/* Circular wafer disc */
+.wafer-disc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #1a1a1f;
+  border: 2px solid #2e2e35;
+  padding: 6px;
+  box-shadow: 0 0 0 4px #17171c, 0 0 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Grid inside the disc */
+.wafer-grid {
+  display: inline-grid;
+  gap: 3px;
+  padding: 0;
+  background: transparent;
+}
+
+.wafer-node {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+
+.wafer-node:hover:not(.wafer-node-hidden) {
+  transform: scale(1.15);
+  border-color: #e4e4e7;
+  box-shadow: 0 0 8px rgba(228, 228, 231, 0.25);
+  z-index: 2;
+}
+
+.wafer-node-hidden {
+  pointer-events: none;
+  cursor: default;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.wafer-node:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+}
+
+.wafer-node .node-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.wafer-node:hover .node-label {
+  opacity: 1;
+}
+
+/* Stats bar */
+.wafer-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.wafer-stat {
+  text-align: center;
+}
+
+.wafer-stat .stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #e4e4e7;
+}
+
+.wafer-stat .stat-label {
+  font-size: 0.7rem;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
