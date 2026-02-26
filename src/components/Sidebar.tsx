@@ -8,7 +8,7 @@ import './Sidebar.css';
 interface SidebarProps {
   wafers: WaferSummary[];
   activeWaferId: string | null;
-  onCreate: (name: string, rows: number, cols: number) => void;
+  onCreate: (name: string) => void;
   onDelete: (id: string) => void;
   onImport?: () => void;
 }
@@ -62,8 +62,6 @@ export function Sidebar({ wafers, activeWaferId, onCreate, onDelete, onImport }:
 
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
-  const [rows, setRows] = useState('');
-  const [cols, setCols] = useState('');
 
   const handleExport = useCallback(() => {
     if (!(ds instanceof CacheDataSource)) return;
@@ -102,13 +100,9 @@ export function Sidebar({ wafers, activeWaferId, onCreate, onDelete, onImport }:
   );
 
   const handleCreate = () => {
-    const r = parseInt(rows, 10);
-    const c = parseInt(cols, 10);
-    if (!name.trim() || isNaN(r) || isNaN(c) || r < 1 || c < 1) return;
-    onCreate(name.trim(), r, c);
+    if (!name.trim()) return;
+    onCreate(name.trim());
     setName('');
-    setRows('8');
-    setCols('8');
     setShowForm(false);
   };
 
@@ -193,26 +187,6 @@ export function Sidebar({ wafers, activeWaferId, onCreate, onDelete, onImport }:
               value={name}
               onChange={(e) => setName(e.target.value)}
               autoFocus
-            />
-          </div>
-          <div className="form-row">
-            <input
-              className="form-input"
-              type="number"
-              placeholder="Rows"
-              min={1}
-              max={50}
-              value={rows}
-              onChange={(e) => setRows(e.target.value)}
-            />
-            <input
-              className="form-input"
-              type="number"
-              placeholder="Cols"
-              min={1}
-              max={50}
-              value={cols}
-              onChange={(e) => setCols(e.target.value)}
             />
           </div>
           <button className="btn-create" onClick={handleCreate} disabled={!name.trim()}>

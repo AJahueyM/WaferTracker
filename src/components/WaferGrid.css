@@ -1,8 +1,9 @@
 .wafer-grid-container {
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
 }
 
 .wafer-grid-container h2 {
@@ -40,53 +41,59 @@
   border-radius: 3px;
 }
 
-/* Circular wafer disc */
-.wafer-disc {
-  display: inline-flex;
+/* ── Grouped layout ──────────────────────────────────────────────── */
+
+/* Outer wrapper: column of group-rows */
+.wafer-groups {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: #1a1a1f;
-  border: 2px solid #2e2e35;
-  padding: 48px;
-  box-shadow: 0 0 0 4px #17171c, 0 0 24px rgba(0, 0, 0, 0.4);
+  /* gap set via inline style */
 }
 
-/* Grid inside the disc */
-.wafer-grid {
-  display: inline-grid;
-  gap: 3px;
-  padding: 0;
-  background: transparent;
+/* One horizontal row of groups */
+.wafer-group-row {
+  display: flex;
+  justify-content: center;
+  /* gap set via inline style */
 }
+
+/* Single group (11×11 block) */
+.wafer-group {
+  background: #18181d;
+  border: 1px solid #2e2e35;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+/* 11×11 CSS grid inside a group */
+.wafer-group-grid {
+  display: grid;
+  /* gridTemplateColumns & gap set via inline style */
+}
+
+/* ── Nodes ────────────────────────────────────────────────────────── */
 
 .wafer-node {
-  width: 52px;
-  height: 52px;
-  border-radius: 6px;
-  border: 2px solid transparent;
+  /* width/height/border-radius set via inline style */
+  border: 1px solid transparent;
   cursor: pointer;
-  transition: transform 0.12s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.1s ease, border-color 0.12s ease, box-shadow 0.12s ease;
   position: relative;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.wafer-node:hover:not(.wafer-node-hidden) {
-  transform: scale(1.15);
+.wafer-node:hover {
+  transform: scale(1.25);
   border-color: #e4e4e7;
-  box-shadow: 0 0 8px rgba(228, 228, 231, 0.25);
+  box-shadow: 0 0 6px rgba(228, 228, 231, 0.3);
   z-index: 2;
-}
-
-.wafer-node-hidden {
-  pointer-events: none;
-  cursor: default;
-  border-color: transparent !important;
-  box-shadow: none !important;
 }
 
 .wafer-node:focus-visible {
   outline: 2px solid #818cf8;
-  outline-offset: 2px;
+  outline-offset: 1px;
 }
 
 .wafer-node .node-label {
@@ -95,16 +102,55 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.15s;
+  transition: opacity 0.12s;
 }
 
 .wafer-node:hover .node-label {
   opacity: 1;
+}
+
+/* Empty placeholders (wafer doesn't cover this position) */
+.wafer-node-placeholder {
+  background: transparent;
+}
+
+/* Zoom controls */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.zoom-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid #2e2e35;
+  background: #1a1a1f;
+  color: #e4e4e7;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.zoom-btn:hover {
+  background: #2e2e35;
+}
+
+.zoom-btn-reset {
+  width: auto;
+  padding: 0 0.5rem;
+  font-size: 0.7rem;
+  color: #a1a1aa;
 }
 
 /* Stats bar */

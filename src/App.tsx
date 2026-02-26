@@ -3,7 +3,7 @@ import { Routes, Route, useParams, useNavigate, Navigate } from 'react-router-do
 import type { Wafer, WaferNode, WaferSummary, NodeQuality } from './types';
 import { DataSourceProvider, useDataSource } from './context/DataSourceContext';
 import { Sidebar } from './components/Sidebar';
-import { WaferGrid } from './components/WaferGrid';
+import { WaferGrid, WAFER_ROWS, WAFER_COLS } from './components/WaferGrid';
 import { NodeEditModal } from './components/NodeEditModal';
 
 function WaferApp() {
@@ -45,8 +45,8 @@ function WaferApp() {
   }, [activeWaferId, loadWafer]);
 
   const handleCreate = useCallback(
-    async (name: string, rows: number, cols: number) => {
-      const wafer = await ds.createWafer(name, rows, cols);
+    async (name: string) => {
+      const wafer = await ds.createWafer(name, WAFER_ROWS, WAFER_COLS);
       await refreshList();
       navigate(`/wafer/${wafer.id}`);
     },
