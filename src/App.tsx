@@ -69,7 +69,7 @@ function WaferApp() {
   }, []);
 
   const handleNodeSave = useCallback(
-    async (updates: { quality: NodeQuality; notes: string }) => {
+    async (updates: { quality: NodeQuality; name: string; notes: string }) => {
       if (!activeWaferId || !editingNode) return;
       await ds.updateNode(activeWaferId, editingNode.id, updates);
       await loadWafer(activeWaferId);

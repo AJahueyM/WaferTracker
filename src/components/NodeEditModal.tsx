@@ -5,23 +5,25 @@ import './NodeEditModal.css';
 
 interface NodeEditModalProps {
   node: WaferNode;
-  onSave: (updates: { quality: NodeQuality; notes: string }) => void;
+  onSave: (updates: { quality: NodeQuality; name: string; notes: string }) => void;
   onClose: () => void;
 }
 
 export function NodeEditModal({ node, onSave, onClose }: NodeEditModalProps) {
   const [quality, setQuality] = useState<NodeQuality>(node.quality);
+  const [name, setName] = useState(node.name);
   const [notes, setNotes] = useState(node.notes);
 
   // Sync if node changes externally
   useEffect(() => {
     setQuality(node.quality);
+    setName(node.name);
     setNotes(node.notes);
   }, [node]);
 
   const handleSave = useCallback(() => {
-    onSave({ quality, notes });
-  }, [quality, notes, onSave]);
+    onSave({ quality, name, notes });
+  }, [quality, name, notes, onSave]);
 
   // Close on Escape
   useEffect(() => {
@@ -41,6 +43,16 @@ export function NodeEditModal({ node, onSave, onClose }: NodeEditModalProps) {
         <p className="modal-subtitle">
           Row {node.row}, Column {node.col}
         </p>
+
+        {/* Name */}
+        <label className="node-name-label">Name</label>
+        <input
+          type="text"
+          className="node-name-input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Give this node a name…"
+        />
 
         {/* Quality slider */}
         <div className="quality-slider-group">

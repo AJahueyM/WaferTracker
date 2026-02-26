@@ -31,11 +31,11 @@ export interface IWaferDataSource {
   /** Get a single node. */
   getNode(waferId: string, nodeId: string): Promise<WaferNode | null>;
 
-  /** Update a node's quality and/or notes. Returns the updated node. */
+  /** Update a node's quality, name, and/or notes. Returns the updated node. */
   updateNode(
     waferId: string,
     nodeId: string,
-    updates: Partial<Pick<WaferNode, 'quality' | 'notes'>>,
+    updates: Partial<Pick<WaferNode, 'quality' | 'name' | 'notes'>>,
   ): Promise<WaferNode>;
 
   /** Batch-set quality for multiple nodes at once. */

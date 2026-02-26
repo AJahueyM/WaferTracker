@@ -98,6 +98,7 @@ export class CacheDataSource implements IWaferDataSource {
           id: nodeId,
           row: r,
           col: c,
+          name: '',
           quality: 'untested',
           notes: '',
           lastUpdated: now,
@@ -136,7 +137,7 @@ export class CacheDataSource implements IWaferDataSource {
   async updateNode(
     waferId: string,
     nodeId: string,
-    updates: Partial<Pick<WaferNode, 'quality' | 'notes'>>,
+    updates: Partial<Pick<WaferNode, 'quality' | 'name' | 'notes'>>,
   ): Promise<WaferNode> {
     const wafer = this.wafers.get(waferId);
     if (!wafer) throw new Error(`Wafer ${waferId} not found`);
@@ -144,6 +145,7 @@ export class CacheDataSource implements IWaferDataSource {
     if (!node) throw new Error(`Node ${nodeId} not found on wafer ${waferId}`);
 
     if (updates.quality !== undefined) node.quality = updates.quality;
+    if (updates.name !== undefined) node.name = updates.name;
     if (updates.notes !== undefined) node.notes = updates.notes;
     node.lastUpdated = new Date().toISOString();
     wafer.updatedAt = node.lastUpdated;

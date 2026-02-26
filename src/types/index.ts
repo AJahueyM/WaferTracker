@@ -14,6 +14,8 @@ export interface WaferNode {
   row: number;
   /** Column index (0-based) */
   col: number;
+  /** Human-readable name/label for this node */
+  name: string;
   /** Current quality classification */
   quality: NodeQuality;
   /** Optional notes about this node */

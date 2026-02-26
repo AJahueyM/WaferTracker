@@ -192,8 +192,8 @@ export function WaferGrid({ wafer, onNodeClick }: WaferGridProps) {
                           borderRadius: nodeSize < 12 ? 2 : nodeSize < 20 ? 3 : 4,
                         }}
                         onClick={() => onNodeClick(node)}
-                        title={`${node.id} — ${qualityLabelMap[node.quality]}`}
-                        aria-label={`Node ${node.id}, quality: ${node.quality}`}
+                        title={`${node.name ? node.name + ' — ' : ''}${node.id} — ${qualityLabelMap[node.quality]}`}
+                        aria-label={`Node ${node.id}${node.name ? ' (' + node.name + ')' : ''}, quality: ${node.quality}`}
                       >
                         {nodeSize >= 28 && <span className="node-label">{node.id}</span>}
                       </button>
